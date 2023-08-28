@@ -15,7 +15,7 @@ export class ProductsController{
         @Body('price') prodPrice: number,
         ): any{
         const generatedId =  this.productsService.insertProduct(prodTitle,prodDesc,prodPrice);
-        return {id: generatedId};
+        return generatedId
     }
 
     @Get()
@@ -29,13 +29,13 @@ export class ProductsController{
     }
 
     @Patch(':id')
-    updateProduct( 
+    async updateProduct( 
         @Param('id') prodId:string,
         @Body('title') prodTitle:string,
         @Body('description') prodDesc: string, 
         @Body('price') prodPrice: number,
         ){
-            this.productsService.updateProduct(prodId, prodTitle, prodDesc, prodPrice);
+            await this.productsService.updateProduct(prodId, prodTitle, prodDesc, prodPrice);
             return null;
         }
 
